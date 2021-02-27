@@ -50,37 +50,23 @@ for url in urls:
         date = dates.find('span',{'class':'visually-hidden'}).get_text().strip()
 
         if name and date:
-            print('name: ' +name.strip())
-            print('date: ' +date.strip())
             data["name"].append(name)                
             data["date"].append(date)              
 
         try:
             post = posts.find('div',{'class':"feed-shared-update-v2__description-wrapper ember-view"}).span.get_text().strip()   
-
-            if post:
-                print('post: ' +post.strip())                       
+            if post:                     
                 data["post"].append(post)
-
         except Exception as e:
-                print('post: ' +'')
                 data["post"].append('')
         try:
             likes = likes.find('span',{'class':'v-align-middle social-details-social-counts__reactions-count'}).get_text().strip()
-
             if likes:
-                print('likes: ' +likes)        
                 data["likes"].append(likes)                            
-
         except Exception as e:
                 print('likes: ' +'0')        
                 data["likes"].append('')     
-        print('count_posts: ' +str(count_posts))
-        data["count_posts"].append(count_posts)
-        print('*'*40)
-    print('='*120)
-    print('\n')
-driver.close()
 
-df=pd.DataFrame(data)
-df
+        data["count_posts"].append(count_posts)
+
+driver.close()
